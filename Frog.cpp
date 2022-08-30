@@ -40,19 +40,12 @@ int isJump(State state, char der[])
             return 1;
     return 0;
 }
-void copyArray(int array1[], int array2[])
-{
-    for (int i = 0; i < Maxlength_frog; i++)
-    {
-        array2[i] = array1[i];
-    }
-}
 
 int jumpLeft_1(State cur_state, State *result)
 {
     if (cur_state.stone > 0)
     {
-        copyArray(cur_state.frogs, result->frogs);
+        *result = cur_state;
         result->stone = cur_state.stone;
         int position_stone = result->stone;
         swap(result->frogs[position_stone], result->frogs[position_stone - 1]);
@@ -65,7 +58,7 @@ int jumpRight_1(State cur_state, State *result)
 {
     if (cur_state.stone < Maxlength_frog - 1)
     {
-        copyArray(cur_state.frogs, result->frogs);
+        *result = cur_state;
         result->stone = cur_state.stone;
         int position_stone = result->stone;
         swap(result->frogs[position_stone], result->frogs[position_stone + 1]);
@@ -78,7 +71,7 @@ int jumpLeft_2(State cur_state, State *result)
 {
     if (cur_state.stone > 1 && isJump(cur_state, (char *)"left"))
     {
-        copyArray(cur_state.frogs, result->frogs);
+        *result = cur_state;
         result->stone = cur_state.stone;
         int position_stone = result->stone;
         swap(result->frogs[position_stone], result->frogs[position_stone - 2]);
@@ -91,7 +84,7 @@ int jumpRight_2(State cur_state, State *result)
 {
     if (cur_state.stone < Maxlength_frog - 2 && isJump(cur_state, (char *)"right"))
     {
-        copyArray(cur_state.frogs, result->frogs);
+        *result = cur_state;
         result->stone = cur_state.stone;
         int position_stone = result->stone;
         swap(result->frogs[position_stone], result->frogs[position_stone + 2]);
